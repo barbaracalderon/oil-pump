@@ -35,6 +35,8 @@ services:
   data-consumer:
     container_name: data-consumer
     build: ./data-consumer
+    environment:
+      CONNECTION_STRING: "amqp://guest:guest@rabbitmq:5672"
     ports: 
       - 8080:8080
     depends_on:
