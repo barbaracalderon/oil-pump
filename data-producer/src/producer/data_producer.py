@@ -16,6 +16,19 @@ class RabbitMQProducer:
                 )
             )
         ).channel()
+        self.channel.exchange_declare(
+            exchange=RabbitConfig.EXCHANGE,
+            exchange_type='direct',
+            durable=True
+        )
+        self.channel.queue_declare(
+            queue=RabbitConfig.QUEUE,
+            durable=True
+        )
+        self.channel.queue_bind(
+            exchange=RabbitConfig.EXCHANGE,
+            queue=RabbitConfig.QUEUE,
+        )
 
 
     def send_data(self, data: EquipmentDataModel):
