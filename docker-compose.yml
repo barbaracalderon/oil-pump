@@ -1,16 +1,61 @@
 services:
-  data-producer:
-    container_name: data-producer
-    build: ./data-producer
-    depends_on:
-      - rabbitmq
-
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbit-mq
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: oil
+    ports:
+      - 5434:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+
+
+  data-consumer:
+    container_name: data-consumer
+    build: ./data-consumer
+    ports: 
+      - 8080:8080
+    depends_on:
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      data-producer:
+        condition: service_completed_successfully
+
+
+  data-producer:
+    container_name: data-producer
+    build: ./data-producer
+    environment:
+      CONNECTION_STRING: "amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+
+
+
