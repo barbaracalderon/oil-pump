@@ -59,5 +59,11 @@ services:
       rabbitmq:
         condition: service_healthy
 
+  frontend:
+    build: ./ngx-admin
+    ports:
+      - "4200:80"
+    volumes:
+      - ./ngx-admin:/app
 
 
