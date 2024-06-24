@@ -60,10 +60,13 @@ services:
         condition: service_healthy
 
   frontend:
-    build: ./ngx-admin
+    build: ./frontend
     ports:
-      - "4200:80"
+      - "4200:4200"
     volumes:
-      - ./ngx-admin:/app
+      - ./frontend:/app
+    depends_on:
+      data-consumer: 
+        condition: service_started
 
 
