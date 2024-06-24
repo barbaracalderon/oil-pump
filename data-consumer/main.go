@@ -191,7 +191,7 @@ func getMaterialData(c *gin.Context) {
 
 func getFluidData(c *gin.Context) {
     var data []EquipmentData
-    err := db.Select(&data, "SELECT id, timestamp, flow_rate, lubrication_oil_level FROM EquipmentData ORDER BY timestamp")
+    err := db.Select(&data, "SELECT id, timestamp, flow_rate, fluid_temperature, lubrication_oil_level FROM EquipmentData ORDER BY timestamp")
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": err})
         return
@@ -200,10 +200,11 @@ func getFluidData(c *gin.Context) {
     fluids := make([]gin.H, len(data))
     for i, d := range data {
         fluids[i] = gin.H{
-            "id":                  d.ID,
-            "timestamp":            d.Timestamp,
-            "flow_rate":            d.FlowRate,
-            "lubrication_oil_level": d.LubricationOilLevel,
+            "id":                       d.ID,
+            "timestamp":                d.Timestamp,
+            "flow_rate":                d.FlowRate,
+            "lubrication_oil_level":    d.LubricationOilLevel,
+            "fluid_temperature":        d.FluidTemperature,
         }
     }
 
