@@ -59,5 +59,14 @@ services:
       rabbitmq:
         condition: service_healthy
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      data-consumer: 
+        condition: service_started
 
 
