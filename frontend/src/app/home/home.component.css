@@ -1,0 +1,15 @@
+/* src/app/home/home.component.css */
+.home-content {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 0.5rem 0;
+  }
+  
