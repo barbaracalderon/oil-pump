@@ -1,5 +1,13 @@
+/* src/app/machine/machine.component.css */
 .machine-content {
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
+  margin: 20px;
+}
+
+.table th, .table td {
+  text-align: center;
+}
+
+.badge {
+  font-size: 1em;
+  padding: 0.5em;
+}
