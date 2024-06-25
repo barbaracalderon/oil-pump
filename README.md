@@ -15,6 +15,8 @@ The frontend has 1 service:
 **This is an ongoing application, under construction.**
 
 ![AngularHome](assets/landing-page.png)
+![AngularMachine](assets/data01.png)
+![AngularMachine](assets/data02.png)
 
 
 ## Author

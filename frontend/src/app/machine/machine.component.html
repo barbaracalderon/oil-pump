@@ -1,7 +1,29 @@
-<!-- src/app/machine/machine.component.html -->
 <div class="machine-content">
-    <h1>Machine Data</h1>
-    <p>Displaying real-time data from various sensors:</p>
-    <!-- Add chart or data display components here -->
+  <h1>Pressure Data</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Timestamp</th>
+          <th>Suction Pressure</th>
+          <th>Discharge Pressure</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pressure of pressureData" [ngClass]="{'table-danger': pressure.discharge_pressure <= pressure.suction_pressure, 'table-success': pressure.discharge_pressure > pressure.suction_pressure}">
+          <td>{{ pressure.id }}</td>
+          <td>{{ pressure.timestamp | date:'short' }}</td>
+          <td>{{ pressure.suction_pressure }}</td>
+          <td>{{ pressure.discharge_pressure }}</td>
+          <td>
+            <span class="badge" [ngClass]="{'bg-success': pressure.discharge_pressure > pressure.suction_pressure, 'bg-danger': pressure.discharge_pressure <= pressure.suction_pressure}">
+              {{ pressure.discharge_pressure > pressure.suction_pressure ? 'OK' : 'Alert' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
