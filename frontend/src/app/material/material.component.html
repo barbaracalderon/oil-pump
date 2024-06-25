@@ -1,0 +1,31 @@
+<div class="material-content">
+  <h1>Material Data</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Timestamp</th>
+          <th>Vibration (0,1 - 5 mm/s)</th>
+          <th>Bearing Temperature (20 - 100 Celsius)</th>
+          <th>Impeller Speed (1000 - 3600 rpm)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let material of materialData" [ngClass]="getStatusClass(material)">
+          <td>{{ material.id }}</td>
+          <td>{{ material.timestamp | date:'short' }}</td>
+          <td>{{ material.vibration }}</td>
+          <td>{{ material.bearing_temperature }}</td>
+          <td>{{ material.impeller_speed }}</td>
+          <td>
+            <span class="badge" [ngClass]="getStatusClass(material)">
+              {{ getStatusClass(material) === 'bg-success' ? 'OK' : 'Alert' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
