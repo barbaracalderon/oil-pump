@@ -1,0 +1,21 @@
+
+.material-content {
+  margin: 20px;
+}
+
+.table th, .table td {
+  text-align: center;
+}
+
+.badge {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}

@@ -1,4 +1,3 @@
-// src/app/machine/machine.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
