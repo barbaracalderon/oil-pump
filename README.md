@@ -1,4 +1,4 @@
-# Oil & Gas Monitoring System
+# Oil & Gas Panel System
 
 This project comprises a backend API and a frontend interface for monitoring equipment data in an oil & gas environment. 
 
