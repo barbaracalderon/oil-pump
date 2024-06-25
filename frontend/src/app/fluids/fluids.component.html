@@ -1,0 +1,38 @@
+<div class="fluids-content">
+    <h1>Fluids Data</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Timestamp</th>
+            <th>Flow Rate (50-2000 gpm)</th>
+            <th>Fluid Temperature (20-80 Celsius)</th>
+            <th>Lubrication Oil Level (10-100 m)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fluid of fluidsData" [ngClass]="{
+            'table-danger': getStatus(fluid.flow_rate, fluid.fluid_temperature, fluid.lubrication_oil_level) !== 'OK',
+            'table-success': getStatus(fluid.flow_rate, fluid.fluid_temperature, fluid.lubrication_oil_level) === 'OK'
+          }">
+            <td>{{ fluid.id }}</td>
+            <td>{{ fluid.timestamp | date:'short' }}</td>
+            <td>{{ fluid.flow_rate }}</td>
+            <td>{{ fluid.fluid_temperature }}</td>
+            <td>{{ fluid.lubrication_oil_level }}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-success': getStatus(fluid.flow_rate, fluid.fluid_temperature, fluid.lubrication_oil_level) === 'OK',
+                'bg-danger': getStatus(fluid.flow_rate, fluid.fluid_temperature, fluid.lubrication_oil_level) !== 'OK'
+              }">
+                {{ getStatus(fluid.flow_rate, fluid.fluid_temperature, fluid.lubrication_oil_level) }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
